@@ -1,0 +1,14 @@
+{
+  "name": "cpp-vector-search",
+  "version": "1.0.0",
+  "description": "C++ vector search engine",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["vector", "search", "c++"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-addon-api": "^8.3.1"
+  }
+}
