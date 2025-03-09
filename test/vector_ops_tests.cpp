@@ -1,75 +1,14 @@
 // test/vector_ops_tests.cpp
 #include "ann/vector_ops.h"
+#include "test_utils.h"
 #include <cmath>
 #include <fstream>
-#include <iomanip>
 #include <iostream>
-#include <sstream>
 #include <vector>
 
-// Global file stream
-std::ofstream logfile;
+std::ofstream test_utils::logfile;
 
-namespace {
-
-bool isApproxEqual(float a, float b, float epsilon = 0.0001f) {
-  return std::fabs(a - b) < epsilon;
-}
-
-bool isApproxEqual(const std::vector<float> &v1, const std::vector<float> &v2,
-                   float epsilon = 0.0001f) {
-  if (v1.size() != v2.size())
-    return false;
-  for (size_t i = 0; i < v1.size(); ++i) {
-    if (!isApproxEqual(v1[i], v2[i], epsilon))
-      return false;
-  }
-  return true;
-}
-
-std::string vecToString(const std::vector<float> &v) {
-  std::ostringstream ss;
-  ss << "[";
-  for (size_t i = 0; i < v.size(); ++i) {
-    ss << v[i] << (i < v.size() - 1 ? ", " : "");
-  }
-  ss << "]";
-  return ss.str();
-}
-
-void logOutput(const std::string &message) {
-  std::cout << message;
-  if (logfile.is_open()) {
-    logfile << message;
-  }
-}
-
-bool testResult(const std::string &name, float actual, float expected) {
-  bool passed = isApproxEqual(actual, expected);
-  std::ostringstream ss;
-  ss << std::left << std::setw(40) << name + ":";
-  ss << (passed ? "PASSED"
-                : "FAILED (Expected: " + std::to_string(expected) +
-                      " | Actual: " + std::to_string(actual) + ")")
-     << "\n";
-  logOutput(ss.str());
-  return passed;
-}
-
-bool testResult(const std::string &name, const std::vector<float> &actual,
-                const std::vector<float> &expected) {
-  bool passed = isApproxEqual(actual, expected);
-  std::ostringstream ss;
-  ss << std::left << std::setw(40) << name + ":";
-  ss << (passed ? "PASSED"
-                : "FAILED (Expected: " + vecToString(expected) +
-                      " | Actual: " + vecToString(actual) + ")")
-     << "\n";
-  logOutput(ss.str());
-  return passed;
-}
-
-} // namespace
+using namespace test_utils;
 
 namespace vectorsearch {
 
